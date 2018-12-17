@@ -27,3 +27,9 @@
     </div>
   </footer>
 </template>
+
+<style>
+  .footer {
+    text-align: center;
+  }
+</style>
