@@ -1,0 +1,74 @@
+[{
+        "productId": 1001,
+        "productName": "小米音响",
+        "salesPrice": 699,
+        "productImage": "1.jpg"
+    },
+    {
+        "productId": 1002,
+        "productName": "蓝牙耳机",
+        "salesPrice": 299,
+        "productImage": "2.jpg"
+    },
+    {
+        "productId": 1003,
+        "productName": "头戴式耳机",
+        "salesPrice": 199,
+        "productImage": "3.jpg"
+    },
+    {
+        "productId": 1004,
+        "productName": "运动式耳机",
+        "salesPrice": 399,
+        "productImage": "4.jpg"
+    },
+    {
+        "productId": 1005,
+        "productName": "移动电源",
+        "salesPrice": 79,
+        "productImage": "5.jpg"
+    },
+    {
+        "productId": 1006,
+        "productName": "小米插座",
+        "salesPrice": 168,
+        "productImage": "6.jpg"
+    },
+    {
+        "productId": 1007,
+        "productName": "入耳式耳机",
+        "salesPrice": 249,
+        "productImage": "7.jpg"
+    },
+    {
+        "productId": 1008,
+        "productName": "小米移动电源",
+        "salesPrice": 129,
+        "productImage": "8.jpg"
+    },
+    {
+        "productId": 1009,
+        "productName": "无线耳机",
+        "salesPrice": 1299,
+        "productImage": "9.jpg"
+    },
+    {
+        "productId": 1010,
+        "productName": "小米4A电视",
+        "salesPrice": 3499,
+        "productImage": "10.jpg"
+    },
+    {
+        "productId": 1011,
+        "productName": "摄像头",
+        "salesPrice": 1999,
+        "productImage": "15.jpg"
+    },
+    {
+        "productId": 1012,
+        "productName": "平衡车",
+        "salesPrice": 4999,
+        "productImage": "16.jpg"
+    }
+
+]

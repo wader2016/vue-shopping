@@ -4,10 +4,13 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import vueLazyLoad from 'vue-lazyload'
+import axios from 'axios';
 
 Vue.config.productionTip = false;
 
 Vue.use(vueLazyLoad);
+
+Vue.prototype.$axios = axios;
 
 /* eslint-disable no-new */
 new Vue({

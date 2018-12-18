@@ -35,90 +35,21 @@
         <div class="accessory-list-wrap">
           <div class="accessory-list col-4">
             <ul>
-              <li>
+              <li v-for="(item,index) in goodsList">
                 <div class="list-item">
                   <div class="pic">
                     <a href="">
-                      <img src="../static/1.jpg" alt="">
+                      <img class="pic-image" v-lazy="'../static/' + item.productImage">
                     </a>
                   </div>
                   <div class="main">
-                    <div class="name">名称</div>
-                    <div class="price">2000</div>
+                    <div class="name">{{item.productName}}</div>
+                    <div class="price">{{item.salesPrice}}</div>
                     <div class="add-cart">加入购物车</div>
                   </div>
                 </div>
               </li>
-              <li>
-                <div class="list-item">
-                  <div class="pic">
-                    <a href="">
-                      <img src="../static/1.jpg" alt="">
-                    </a>
-                  </div>
-                  <div class="main">
-                    <div class="name">名称</div>
-                    <div class="price">2000</div>
-                    <div class="add-cart">加入购物车</div>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div class="list-item">
-                  <div class="pic">
-                    <a href="">
-                      <img src="../static/1.jpg" alt="">
-                    </a>
-                  </div>
-                  <div class="main">
-                    <div class="name">名称</div>
-                    <div class="price">2000</div>
-                    <div class="add-cart">加入购物车</div>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div class="list-item">
-                  <div class="pic">
-                    <a href="">
-                      <img src="../static/1.jpg" alt="">
-                    </a>
-                  </div>
-                  <div class="main">
-                    <div class="name">名称</div>
-                    <div class="price">2000</div>
-                    <div class="add-cart">加入购物车</div>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div class="list-item">
-                  <div class="pic">
-                    <a href="">
-                      <img src="../static/1.jpg" alt="">
-                    </a>
-                  </div>
-                  <div class="main">
-                    <div class="name">名称</div>
-                    <div class="price">2000</div>
-                    <div class="add-cart">加入购物车</div>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div class="list-item">
-                  <div class="pic">
-                    <a href="">
-                      <img src="../static/1.jpg" alt="">
-                    </a>
-                  </div>
-                  <div class="main">
-                    <div class="name">名称</div>
-                    <div class="price">2000</div>
-                    <div class="add-cart">加入购物车</div>
-                  </div>
-                </div>
-              </li>
+
 
             </ul>
           </div>
@@ -139,13 +70,24 @@ import NavBread from '../components/NavBread'
 export default {
   data() {
     return {
-
+      goodsList:[]
     }
+  },
+  mounted() {
+    this.getGoodsList();
   },
   components:{
     NavHeader,
     NavFooter,
     NavBread
+  },
+  methods: {
+      getGoodsList() {
+         this.$axios.get("http://localhost:3000/users").then(resp => {
+            console.log(resp.data);
+            this.goodsList = resp.data;
+         })
+      }
   }
 }
 </script>
@@ -167,6 +109,10 @@ export default {
   .filter-price {
     font-weight: bold;
     font-size: 20px;
+  }
+  .pic-image {
+    width: 220px;
+    height: 220px;
   }
 
   .accessory-list >ul li:hover {
