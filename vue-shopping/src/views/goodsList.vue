@@ -35,10 +35,10 @@
         <div class="accessory-list-wrap">
           <div class="accessory-list col-4">
             <ul>
-              <li v-for="(item,index) in goodsList">
+              <li v-for="item in goodsList">
                 <div class="list-item">
                   <div class="pic">
-                    <a href="">
+                    <a href="javascript:void(0);">
                       <img class="pic-image" v-lazy="'../static/' + item.productImage">
                     </a>
                   </div>
@@ -53,7 +53,12 @@
 
             </ul>
           </div>
-
+          <div class="loadMore"
+               v-infinite-scroll="loadMore"
+               infinite-scroll-disabled="busy"
+               infinite-scroll-distance="20" >
+            <img src="../assets/loading-spinning-bubbles.svg" v-show="loading">
+          </div>
         </div>
       </div>
     </div>
@@ -70,7 +75,11 @@ import NavBread from '../components/NavBread'
 export default {
   data() {
     return {
-      goodsList:[]
+      goodsList:[],
+      loading:false,
+      busy:true,
+      page:1
+
     }
   },
   mounted() {
@@ -82,12 +91,33 @@ export default {
     NavBread
   },
   methods: {
-      getGoodsList() {
-         this.$axios.get("http://localhost:3000/users").then(resp => {
-            console.log(resp.data);
-            this.goodsList = resp.data;
+      getGoodsList(flag) {
+          let param = {page:this.page};
+          this.loading = true;
+         this.$axios.get("http://localhost:3000/users",{params:param}).then(resp => {
+            if(flag){
+              this.loading = false;
+              this.goodsList = this.goodsList.concat(resp.data);
+              if(resp.data.length == 0){
+                  this.busy = true;
+              }
+              else {
+                  this.busy = false;
+              }
+            }
+            else {
+              this.goodsList = resp.data;
+              this.busy = false;
+            }
+
          })
-      }
+      },
+    loadMore() {
+        setTimeout(()=>{
+            this.page++;
+          this.getGoodsList(true);
+        },500)
+    }
   }
 }
 </script>
@@ -182,6 +212,9 @@ export default {
     padding: 8px 0;
     color: #d1434a;
     cursor: pointer;
+  }
+  .loadMore {
+    text-align: center;
   }
 
 </style>
