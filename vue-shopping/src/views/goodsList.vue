@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main">
     <nav-header></nav-header>
     <nav-bread>
       <span>goods</span>
@@ -39,7 +39,7 @@
                 <div class="list-item">
                   <div class="pic">
                     <a href="javascript:void(0);">
-                      <img class="pic-image" v-lazy="'../static/' + item.productImage">
+                      <img class="pic-image" v-lazy="'../static/' + item.productImage" alt="" >
                     </a>
                   </div>
                   <div class="main">
@@ -50,13 +50,9 @@
                 </div>
               </li>
 
-
             </ul>
           </div>
-          <div class="loadMore"
-               v-infinite-scroll="loadMore"
-               infinite-scroll-disabled="busy"
-               infinite-scroll-distance="20" >
+          <div class="loadMore" v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="20" >
             <img src="../assets/loading-spinning-bubbles.svg" v-show="loading">
           </div>
         </div>
@@ -64,7 +60,8 @@
     </div>
 
 
-    <nav-footer></nav-footer>
+
+
   </div>
 </template>
 
@@ -72,6 +69,7 @@
 import NavHeader from '../components/NavHeader'
 import NavFooter from '../components/NavFooter'
 import NavBread from '../components/NavBread'
+
 export default {
   data() {
     return {
@@ -91,6 +89,7 @@ export default {
     NavBread
   },
   methods: {
+
       getGoodsList(flag) {
           let param = {page:this.page};
           this.loading = true;
@@ -98,12 +97,7 @@ export default {
             if(flag){
               this.loading = false;
               this.goodsList = this.goodsList.concat(resp.data);
-              if(resp.data.length == 0){
-                  this.busy = true;
-              }
-              else {
-                  this.busy = false;
-              }
+              this.busy = resp.data.length === 0;
             }
             else {
               this.goodsList = resp.data;
@@ -123,6 +117,10 @@ export default {
 </script>
 
 <style scoped>
+  .main {
+    max-width: 1280px;
+    margin: 0 auto;
+  }
   .filter-nav {
     height: 60px;
     line-height: 60px;
