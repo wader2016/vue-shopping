@@ -45,7 +45,7 @@
                   <div class="main">
                     <div class="name">{{item.productName}}</div>
                     <div class="price">{{item.salesPrice}}</div>
-                    <div class="add-cart">加入购物车</div>
+                    <div class="add-cart" @click="AddToCart">加入购物车</div>
                   </div>
                 </div>
               </li>
@@ -59,7 +59,19 @@
       </div>
     </div>
 
-
+    <modal v-show="modalShow" modalShow="modalShow" @close="CloseModal">
+      <div slot="content">
+        <p style="text-align: center;margin: 30px 0;">加入成功！</p>
+      </div>
+      <div slot="btn-group">
+        <div class="btn-flex">
+          <button class="btn btn-continue">继续购物</button>
+          <button class="btn btn-cart">
+            <router-link class="btn-cart" to="/cart">查看购物车</router-link>
+          </button>
+        </div>
+      </div>
+    </modal>
 
 
   </div>
@@ -69,6 +81,7 @@
 import NavHeader from '../components/NavHeader'
 import NavFooter from '../components/NavFooter'
 import NavBread from '../components/NavBread'
+import  Modal   from  '../components/modal'
 
 export default {
   data() {
@@ -76,7 +89,10 @@ export default {
       goodsList:[],
       loading:false,
       busy:true,
-      page:1
+      page:1,
+
+      modalShow:false
+
 
     }
   },
@@ -86,11 +102,11 @@ export default {
   components:{
     NavHeader,
     NavFooter,
-    NavBread
+    NavBread,
+    Modal
   },
   methods: {
-
-      getGoodsList(flag) {
+    getGoodsList(flag) {
           let param = {page:this.page};
           this.loading = true;
          this.$axios.get("http://localhost:3000/users",{params:param}).then(resp => {
@@ -111,6 +127,12 @@ export default {
             this.page++;
           this.getGoodsList(true);
         },500)
+    },
+    AddToCart() {
+        this.modalShow = true;
+    },
+    CloseModal() {
+        this.modalShow = false;
     }
   }
 }
@@ -213,6 +235,28 @@ export default {
   }
   .loadMore {
     text-align: center;
+  }
+  .btn-flex {
+    display: flex;
+  }
+
+  .btn {
+    width: 50%;
+    height: 40px;
+    flex: 1;
+    border: none;
+    margin: 0 10px;
+    cursor: pointer;
+  }
+  .btn-continue {
+    background: #fff;
+    border: 2px solid #d1434a;
+    color: #d1434a;
+  }
+  .btn-cart {
+    background: #d1434a;
+    color: #fff;
+    text-decoration: none;
   }
 
 </style>

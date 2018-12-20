@@ -4,23 +4,27 @@
      <img src="../static/imooc.jpg" alt="">
    </div>
    <div class="header-right">
-      <div>Login</div>
+      <div v-show="!modalShow" @click="showModal">Login</div>
+      <div v-show="modalShow">
+        <span></span>
+        <span>Logout</span>
+      </div>
    </div>
 
-   <modal>
+   <modal v-show="modalShow" modalShow="modalShow" @close="CloseModal">
      <div slot="content">
        <div class="inner-content">
          <p>Login</p>
          <div class="loginInput">
-           <input type="text" placeholder="用户名">
+           <input type="text" v-model="userName" placeholder="用户名">
          </div>
          <div class="loginInput">
-           <input type="password" placeholder="密码">
+           <input type="password" v-model="userPwd" placeholder="密码">
          </div>
        </div>
      </div>
      <div slot="btn-group">
-        <button class="btn-login">登录</button>
+        <button class="btn-login" @click="login">登 录</button>
      </div>
    </modal>
 
@@ -74,11 +78,36 @@
   export  default {
     data() {
       return {
-
+        userName:'',
+        userPwd:'',
+        modalShow:false
       }
     },
     components:{
       Modal
+    },
+    methods:{
+        login() {
+            if(!this.userName || !this.userPwd){
+                console.log("登录失败");
+                return;
+            }
+            let params = {
+                userName:this.userName,
+                userPwd:this.userPwd
+            };
+
+           this.$axios.post("http://localhost:3000/users/login",params).then((res)=>{
+              console.log(res);
+
+           })
+        },
+      showModal() {
+          this.modalShow = true;
+      },
+      CloseModal() {
+          this.modalShow = false;
+      }
     }
   }
 

@@ -15,10 +15,27 @@
           </div>
         </div>
     </div>
-    <div class="modal-overlay"></div>
+    <div class="modal-overlay" @click="closeModal"></div>
 
   </div>
 </template>
+
+<script>
+  export default {
+      props:['modalShow'],
+      data() {
+        return {
+
+        }
+      },
+      methods:{
+          closeModal() {
+              this.$emit("close");
+          }
+      }
+  }
+
+</script>
 
 <style scoped>
   .modal-overlay {

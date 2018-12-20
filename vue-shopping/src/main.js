@@ -7,6 +7,10 @@ import vueLazyLoad from 'vue-lazyload'
 import infiniteScroll from 'vue-infinite-scroll';
 import axios from 'axios';
 
+// import './assets/css/base.css'
+// import './assets/css/checkout.css'
+// import './assets/css/product.css'
+
 Vue.config.productionTip = false;
 
 Vue.use(vueLazyLoad);
